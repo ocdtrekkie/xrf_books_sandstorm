@@ -22,7 +22,7 @@ a:hover {
 }
 
 .header {
-	width: 780px;
+	width: 980px;
 	height: 100px;
 	margin-left: auto;
 	margin-right: auto;
@@ -31,7 +31,7 @@ a:hover {
 }
 
 .container {
-	width: 788px;
+	width: 988px;
     height: auto;
 	margin-left:auto;
 	margin-right:auto;
@@ -51,6 +51,18 @@ a:hover {
 
 .actions-bar{
 	display: none;
+}
+
+.bookcover{
+	padding: 0px;
+	height: 250px;
+	width: 167px;
+	border-width: 1px;
+	border-style: solid;
+	background-color: #CCCCCC;
+	font-variant: small-caps;
+	display: table-cell;
+	vertical-align: middle;
 }
 
 td, tr {

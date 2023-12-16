@@ -48,6 +48,7 @@ wait_for mysql /var/run/mysqld/mysqld.sock
 if [ ! -e /var/.db-created ]; then
     mysql --user root -e 'CREATE DATABASE app'
     mysql --user root --database app < /opt/app/install_into_db.sql
+    mysql --user root --database app < /opt/app/install_into_db_books.sql
     touch /var/.db-created
 fi
 

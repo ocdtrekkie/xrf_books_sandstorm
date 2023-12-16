@@ -6,13 +6,8 @@ put the following code within the <head> tags of all the pages you want to imple
 (index.php, retrieve.php, gallery.php and request.php I believe)
 
 */
-
 body {
-		background-image: url(images/earth.jpg);
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		background-size: cover;
+        background: #FFFFFF;
      	font-family: Verdana;
         color: #000;
 }
@@ -31,7 +26,7 @@ a:hover {
 }
 
 .header {
-	width: 780px;
+	width: 980px;
 	height: 100px;
 	margin-left: auto;
 	margin-right: auto;
@@ -41,7 +36,7 @@ a:hover {
 }
 
 .container {
-	width: 788px;
+	width: 988px;
     height: auto;
 	margin-left:auto;
 	margin-right:auto;
@@ -52,13 +47,25 @@ a:hover {
 }
 
 .footer{
-	width: 780px;
+	width: 980px;
 	height: 25px;
 	margin-left: auto;
 	margin-right: auto;
 	padding-left: 10px;
 	padding-right: 10px;
 	background-image: url(images/footer.png);
+}
+
+.bookcover{
+	padding: 0px;
+	height: 250px;
+	width: 167px;
+	border-width: 1px;
+	border-style: solid;
+	background-color: #CCCCCC;
+	font-variant: small-caps;
+	display: table-cell;
+	vertical-align: middle;
 }
 
 td, tr {

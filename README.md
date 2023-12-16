@@ -1,8 +1,9 @@
-# XRF Core Components for Sandstorm
+# XRF Books for Sandstorm
 
-XRF, which was backronymed into standing for Xtensible Resource Framework, is a PHP web application framework intended to support a variety of relatively dissimilar websites under a common format. XRF Core contains common files that will be necessary for any XRF-based Sandstorm app, such as the global files and common function files.
+XRF Books is a library cataloguing module for XRF. It's designed to handle multiple types of media such as books, e-books, movies, music, and video games.
 
 ## System Requirements
 
-* PHP 7.0 or better
+* XRF 0.3a
+* PHP 8.2 or better
 * MySQL
