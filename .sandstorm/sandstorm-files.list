@@ -3,6 +3,7 @@
 # the app runs in dev mode. You may manually add or remove files, but don't
 # expect comments or ordering to be retained.
 bin
+etc/alternatives/awk
 etc/bindresvport.blacklist
 etc/default/nss
 etc/ld.so.cache
@@ -92,16 +93,22 @@ opt/app/acp_users.php
 opt/app/acp_view_log.php
 opt/app/includes/footer.php
 opt/app/includes/functions_auth.php
+opt/app/includes/functions_class.php
 opt/app/includes/functions_db.php
 opt/app/includes/functions_get.php
+opt/app/includes/functions_lib.php
 opt/app/includes/functions_redir.php
 opt/app/includes/functions_sec.php
 opt/app/includes/global.php
 opt/app/includes/global_req_login.php
 opt/app/includes/header.php
+opt/app/includes/include_lconfig.php
 opt/app/includes/variables.php
 opt/app/index.php
 opt/app/install_into_db.sql
+opt/app/install_into_db_books.sql
+opt/app/search.php
+opt/app/search_results.php
 opt/app/styles/print/style.css
 opt/app/styles/xrfdark/images/banner.png
 opt/app/styles/xrfdark/images/earth.jpg
@@ -116,8 +123,11 @@ proc/cpuinfo
 sandstorm-http-bridge
 sandstorm-http-bridge-config
 sandstorm-manifest
+usr/bin/awk
 usr/bin/bash
+usr/bin/du
 usr/bin/find
+usr/bin/mawk
 usr/bin/mkdir
 usr/bin/mysql
 usr/bin/rm

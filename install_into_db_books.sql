@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `l_periodicals` (
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `lccn` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
   `lccat` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`issn`),
+  PRIMARY KEY (`issn`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='List of periodicals';
 
 CREATE TABLE IF NOT EXISTS `l_readlist` (
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `l_readlist` (
   `uid` int(8) NOT NULL COMMENT 'User ID',
   `bookid` int(12) NOT NULL COMMENT 'Item ID',
   `date` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Date added to reading list',
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='List of materials on reading lists';
 
 CREATE TABLE IF NOT EXISTS `l_serials` (
