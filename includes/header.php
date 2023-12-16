@@ -11,7 +11,7 @@ echo "<html><head><title>$xrf_site_name Library$xrf_title_nugget$xrf_page_subtit
 echo "<div class=\"header\" align=\"center\">
 <table width=\"100%\"><tr><td>
 <p align=\"left\">
-<font size=\"6\" color=\"white\">$xrf_site_name Library</font><br>
+<font size=\"6\" color=\"white\">$xrf_site_name</font><br>
 <font color=\"white\" class=\"navigation-box\"><a href=\"$xrf_site_url\"><font color=\"white\">$xrf_myusername</font></a></font>
 </p>
 </td><td>
