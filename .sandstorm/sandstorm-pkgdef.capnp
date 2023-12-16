@@ -41,29 +41,18 @@ const pkgdef :Spk.PackageDefinition = (
     # case.
 
     metadata = (
-      # Data which is not needed specifically to execute the app, but is useful
-      # for purposes like marketing and display.  These fields are documented at
-      # https://docs.sandstorm.io/en/latest/developing/publishing-apps/#add-required-metadata
-      # and (in deeper detail) in the sandstorm source code, in the Metadata section of
-      # https://github.com/sandstorm-io/sandstorm/blob/master/src/sandstorm/package.capnp
       icons = (
-        # Various icons to represent the app in various contexts.
-        #appGrid = (svg = embed "path/to/appgrid-128x128.svg"),
-        #grain = (svg = embed "path/to/grain-24x24.svg"),
-        #market = (svg = embed "path/to/market-150x150.svg"),
-        #marketBig = (svg = embed "path/to/market-big-300x300.svg"),
+        appGrid = (svg = embed "emyller-books.svg"),
+        grain = (svg = embed "emyller-books.svg"),
+        market = (svg = embed "emyller-books.svg"),
+        marketBig = (svg = embed "emyller-books.svg"),
       ),
 
-      website = "http://example.com",
-      # This should be the app's main website url.
+      website = "https://github.com/ocdtrekkie/xrf_books_sandstorm",
 
-      codeUrl = "http://example.com",
-      # URL of the app's source code repository, e.g. a GitHub URL.
-      # Required if you specify a license requiring redistributing code, but optional otherwise.
+      codeUrl = "https://github.com/ocdtrekkie/xrf_books_sandstorm",
 
-      license = (none = void),
-      # The license this package is distributed under.  See
-      # https://docs.sandstorm.io/en/latest/developing/publishing-apps/#license
+      license = (openSource = mit),
 
       categories = [],
       # A list of categories/genres to which this app belongs, sorted with best fit first.
@@ -73,10 +62,7 @@ const pkgdef :Spk.PackageDefinition = (
       author = (
         # Fields relating to the author of this app.
 
-        contactEmail = "youremail@example.com",
-        # Email address to contact for any issues with this app. This includes end-user support
-        # requests as well as app store administrator requests, so it is very important that this be a
-        # valid address with someone paying attention to it.
+        contactEmail = "inbox@jacobweisz.com",
 
         #pgpSignature = embed "path/to/pgp-signature",
         # PGP signature attesting responsibility for the app ID. This is a binary-format detached
