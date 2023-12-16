@@ -44,6 +44,13 @@ HOME=/etc/mysql /usr/sbin/mysqld --skip-grant-tables &
 /usr/sbin/php-fpm8.2 --nodaemonize --fpm-config /etc/php/8.2/fpm/php-fpm.conf &
 # Wait until mysql and php have bound their sockets, indicating readiness
 wait_for mysql /var/run/mysqld/mysqld.sock
+
+if [ ! -e /var/.db-created ]; then
+    mysql --user root -e 'CREATE DATABASE app'
+    mysql --user root --database app < /opt/app/install_into_db.sql
+    touch /var/.db-created
+fi
+
 wait_for php-fpm8.2 /var/run/php/php8.2-fpm.sock
 
 # Start nginx.
