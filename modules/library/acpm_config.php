@@ -2,7 +2,7 @@
 require("ismodule.php");
 require("modules/$modfolder/include_lconfig.php");
 
-$do = $_GET['do'];
+$do = $_GET['do'] ?? '';
 if ($do == "change")
 {
 	$new_library_home = mysqli_real_escape_string($xrf_db, $_POST['library_home']);

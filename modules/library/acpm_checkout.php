@@ -1,8 +1,8 @@
 <?php
 require("ismodule.php");
 require("modules/$modfolder/include_lconfig.php");
-$do = $_GET['do'];
-$passid = $_GET['passid'];
+$do = $_GET['do'] ?? '';
+$passid = $_GET['passid'] ?? '';
 if ($do == "check")
 {
 	$patron = mysqli_real_escape_string($xrf_db, $_POST['patron']);

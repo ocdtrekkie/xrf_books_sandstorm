@@ -2,7 +2,7 @@
 require("ismodule.php");
 require("modules/$modfolder/functions_lib.php");
 require("modules/$modfolder/include_lconfig.php");
-$do = $_GET['do'];
+$do = $_GET['do'] ?? '';
 if ($do == "add")
 {
 	$title = $_POST['title'];
