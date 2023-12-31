@@ -3,24 +3,25 @@ require_once("includes/global.php");
 require_once("includes/functions_class.php");
 require_once("includes/functions_lib.php");
 require_once("includes/include_lconfig.php");
+$xrf_page_subtitle = "";
 
-$filter = $_GET['filter'];
-$group = $_GET['group'];
-$author = $_GET['author'];
-$sort = $_GET['sort'];
-$limit = $_GET['limit'];
+$filter = $_GET['filter'] ?? '';
+$group = $_GET['group'] ?? '';
+$author = $_GET['author'] ?? '';
+$sort = $_GET['sort'] ?? '';
+$limit = $_GET['limit'] ?? '';
 $limit = (int)$limit;
-$view = $_GET['view'];
-$issn = mysqli_real_escape_string($xrf_db, $_GET['issn']);
-$location = mysqli_real_escape_string($xrf_db, $_GET['location']);
-$type = mysqli_real_escape_string($xrf_db, $_GET['type']);
+$view = $_GET['view'] ?? '';
+$issn = mysqli_real_escape_string($xrf_db, $_GET['issn'] ?? '');
+$location = mysqli_real_escape_string($xrf_db, $_GET['location'] ?? '');
+$type = mysqli_real_escape_string($xrf_db, $_GET['type'] ?? '');
 
-$searchterm = mysqli_real_escape_string($xrf_db, $_POST['searchterm']);
-$searchwhat = mysqli_real_escape_string($xrf_db, $_POST['searchwhat']);
-$searchtype = mysqli_real_escape_string($xrf_db, $_POST['searchtype']);
-$searchgroup = mysqli_real_escape_string($xrf_db, $_POST['searchgroup']);
-$searchview = mysqli_real_escape_string($xrf_db, $_POST['searchview']);
-$searchlocation = mysqli_real_escape_string($xrf_db, $_POST['searchlocation']);
+$searchterm = mysqli_real_escape_string($xrf_db, $_POST['searchterm'] ?? '');
+$searchwhat = mysqli_real_escape_string($xrf_db, $_POST['searchwhat'] ?? '');
+$searchtype = mysqli_real_escape_string($xrf_db, $_POST['searchtype'] ?? '');
+$searchgroup = mysqli_real_escape_string($xrf_db, $_POST['searchgroup'] ?? '');
+$searchview = mysqli_real_escape_string($xrf_db, $_POST['searchview'] ?? '');
+$searchlocation = mysqli_real_escape_string($xrf_db, $_POST['searchlocation'] ?? '');
 if ($searchtype != "") $type = $searchtype;
 if ($searchgroup != "") $group = $searchgroup;
 if ($searchview != "") $view = $searchview;
@@ -82,32 +83,36 @@ $author = (int)$author;
 $cond3 = " AND author='$author'";
 $xrf_page_subtitle = "By " . xrfl_getauthor($xrf_db, $author);
 }
+else $cond3 = "";
 
 if ($searchwhat == "keyword")
 {
 $cond4 = " AND (tags LIKE '%$searchterm%' OR title LIKE '%$searchterm%')";
 }
-if ($searchwhat == "title")
+elseif ($searchwhat == "title")
 {
 $cond4 = " AND title LIKE '%$searchterm%'";
 }
-if ($searchwhat == "numbers")
+elseif ($searchwhat == "numbers")
 {
 $searchterm = str_replace("-","",trim($searchterm));
 $cond4 = " AND (isbn10 = '$searchterm' OR isbn13 = '$searchterm' OR issn = '$searchterm' OR lccn = '$searchterm')";
 }
+else $cond4 = "";
 
 if ($issn != "")
 {
 	$cond5 = " AND issn = '$issn'";
 	$xrf_page_subtitle = xrfl_getperiodical($xrf_db, $issn);
 }
+else $cond5 = "";
 
 if ($location != "")
 {
 	$cond6 = " AND location = '$location'";
 	$xrf_page_subtitle = xrfl_getlocation($xrf_db, $location);
 }
+else $cond6 = "";
 
 if ($type != "")
 {
@@ -115,6 +120,7 @@ if ($type != "")
 	$cond7 = " AND typecode = '$type'";
 	$xrf_page_subtitle = xrfl_gettype($xrf_db, $type);
 }
+else $cond7 = "";
 
 if ($sort == "" || $sort == "dewey")
 $sort1 = "dewey, title ASC";
