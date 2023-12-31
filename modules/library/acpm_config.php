@@ -9,8 +9,8 @@ if ($do == "change")
 	$new_library_barcode = mysqli_real_escape_string($xrf_db, $_POST['library_barcode']);
 	$new_library_local_repository = mysqli_real_escape_string($xrf_db, $_POST['library_local_repository']);
 	$new_library_remote_mailto = mysqli_real_escape_string($xrf_db, $_POST['library_remote_mailto']);
-	$new_locgov_enable = $_POST['locgov_enable'];
-	$new_steam_enable = $_POST['steam_enable'];
+	$new_locgov_enable = $_POST['locgov_enable'] ?? '';
+	$new_steam_enable = $_POST['steam_enable'] ?? '';
 	
 	if ($new_library_home != $xrfl_library_home)
 	{
@@ -106,8 +106,10 @@ else
 {
 	if ($xrfl_locgov_enable == 1)
 		$locgov_checked = " checked";
+	else $locgov_checked = "";
 	if ($xrfl_steam_enable == 1)
 		$steam_checked = " checked";
+	else $steam_checked = "";
 	echo "
 	<p><b>Library Configuration</b></p>
 	<form action=\"acp_module_panel.php?modfolder=library&modpanel=config&do=change\" method=\"POST\">

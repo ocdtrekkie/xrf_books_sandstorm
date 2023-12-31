@@ -84,8 +84,8 @@ if ($do == "add")
 }
 else
 {
-	$copyfrom = mysqli_real_escape_string($xrf_db, $_GET['copyfrom']);
-	$postcopyfrom = mysqli_real_escape_string($xrf_db, $_POST['copyfrom']);
+	$copyfrom = mysqli_real_escape_string($xrf_db, $_GET['copyfrom'] ?? '');
+	$postcopyfrom = mysqli_real_escape_string($xrf_db, $_POST['copyfrom'] ?? '');
 	if ($copyfrom == "" && $postcopyfrom != "") { $copyfrom = $postcopyfrom;}
 	$copyfrom = trim($copyfrom);
 	if ($copyfrom != "" && substr($copyfrom,0,4) == substr($xrfl_library_barcode,0,4)) {
@@ -174,6 +174,10 @@ else
 		} elseif ($sourcedewey != "" & $sourcetitle != "") {
 			$sourcedewey = $sourcedewey . " " . strtoupper(substr($sourcetitle,0,3));
 		}
+	} else {
+		$sourcetitle = ""; $sourceauthorid = ""; $sourceauthorname = ""; $sourceauthoryears = "";
+		$sourcetypecode = ""; $sourcedewey = ""; $sourceformat = ""; $sourceyear = "";
+		$sourceisbn10 = ""; $sourceisbn13 = ""; $sourceissn = ""; $sourcelccn = ""; $sourcelccat = ""; $sourcetags = "";
 	}
 	
 	echo "<b>Add Library Media</b><p>";
