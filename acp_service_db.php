@@ -24,6 +24,8 @@ else
 		if ($confirm == 1)
 		{
 			$result=mysqli_multi_query($xrf_db, $sqltoexecute);
+			// prevent the next query from failing
+			while(mysqli_more_results($xrf_db)) { mysqli_next_result($xrf_db); }
 			$query="INSERT INTO g_log (uid, date, event) VALUES ('$xrf_myid',NOW(),'Executed arbitrary SQL servicing.')";
 			mysqli_query($xrf_db, $query);
 			xrf_go_redir("acp.php","Servicing complete.",2);

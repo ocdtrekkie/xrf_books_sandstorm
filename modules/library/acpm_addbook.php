@@ -95,6 +95,7 @@ else
 		$sourcedataresult = mysqli_query($xrf_db, $sourcedataquery);
 		$sourcetitle = xrf_mysql_result($sourcedataresult,0,"title");
 		$sourceauthorid = xrf_mysql_result($sourcedataresult,0,"author");
+		$sourceauthorname = ""; $sourceauthoryears = "";
 		$sourcetypecode = xrf_mysql_result($sourcedataresult,0,"typecode");
 		$sourcedewey = xrf_mysql_result($sourcedataresult,0,"dewey");
 		$sourceformat = xrf_mysql_result($sourcedataresult,0,"format");

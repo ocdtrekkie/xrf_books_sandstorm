@@ -46,6 +46,12 @@ CREATE TABLE IF NOT EXISTS `l_config` (
 
 INSERT INTO `l_config` (`library_home`, `library_barcode`, `library_local_repository`, `library_remote_mailto`, `locgov_enable`, `steam_enable`) VALUES ('', '', '', '', '0', '0');
 
+CREATE TABLE IF NOT EXISTS `l_externals` (
+  `barcode` int(12) NOT NULL,
+  `steam_id` int(12) DEFAULT NULL,
+  PRIMARY KEY (`barcode`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS `l_locations` (
   `id` int(4) NOT NULL AUTO_INCREMENT,
   `code` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
