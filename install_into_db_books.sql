@@ -55,7 +55,8 @@ CREATE TABLE IF NOT EXISTS `l_locations` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Locations of library materials';
 
 INSERT IGNORE INTO `l_locations` (`id`, `code`, `descr`) VALUES
-(1, 'libry', 'Library');
+(1, 'phylb', 'Physical Library'),
+(2, 'diglb', 'Digital Library');
 
 CREATE TABLE IF NOT EXISTS `l_periodicals` (
   `issn` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
@@ -107,7 +108,12 @@ CREATE TABLE IF NOT EXISTS `l_typecodes` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Types of library materials';
 
 INSERT IGNORE INTO `l_typecodes` (`id`, `code`, `descr`, `default_location`, `access_level`) VALUES
-(1, '', 'Books', 'libry', 1);
+(1, '', 'Books', 'phylb', 'P'),
+(2, 'EB', 'Ebooks', 'diglb', 'L');
 
-INSERT IGNORE INTO g_classes (`code`,`desc`) VALUES('L','eLibrary Access');
+INSERT IGNORE INTO g_classes (`code`,`desc`) VALUES
+('L','Digital Library Access'),
+('P','Physical Library Access'),
+('R','Restricted Material Access');
+
 INSERT IGNORE INTO g_modules (`name`,`prefix`,`folder`,`ord`,`active`) VALUES('Library','l','library',5,1);

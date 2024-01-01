@@ -184,14 +184,24 @@ const pkgdef :Spk.PackageDefinition = (
           # Prose describing what this role means, suitable for a tool tip or similar help text.
         ),
         (
-          name = "mod",
-          title = (defaultText = "mod"),
-          description = (defaultText = "ability to moderate the system"),
+          name = "operate",
+          title = (defaultText = "operate"),
+          description = (defaultText = "ability to handle circulation"),
+        ),
+		(
+          name = "restrictedarea",
+          title = (defaultText = "restrictedarea"),
+          description = (defaultText = "restricted material access"),
         ),
         (
-          name = "user",
-          title = (defaultText = "user"),
-          description = (defaultText = "normal user access"),
+          name = "digitalbrowse",
+          title = (defaultText = "digitalbrowse"),
+          description = (defaultText = "digital library access"),
+        ),
+		(
+          name = "physicalbrowse",
+          title = (defaultText = "physicalbrowse"),
+          description = (defaultText = "physical library access"),
         ),
       ],
       roles = [
@@ -201,7 +211,7 @@ const pkgdef :Spk.PackageDefinition = (
           title = (defaultText = "administrator"),
           # Name of the role.  Shown in the Sandstorm UI to indicate which users have which roles.
   
-          permissions  = [true,true,true],
+          permissions  = [true,true,true,true,true],
           # An array indicating which permissions this role carries.
           # It should be the same length as the permissions array in
           # viewInfo, and the order of the lists must match.
@@ -214,22 +224,28 @@ const pkgdef :Spk.PackageDefinition = (
           # Prose describing what this role means, suitable for a tool tip or similar help text.
         ),
 		(
-          title = (defaultText = "moderator"),
-          permissions  = [false,true,true],
-          verbPhrase = (defaultText = "can moderate the app"),
+          title = (defaultText = "librarian"),
+          permissions  = [false,true,true,true,true],
+          verbPhrase = (defaultText = "can handle circulation"),
           description = (defaultText = "moderators can perform limited administrative functions."),
         ),
-        (
-          title = (defaultText = "user"),
-          permissions  = [false,false,true],
-          verbPhrase = (defaultText = "can use the app"),
-          description = (defaultText = "users can use the application normally."),
+		(
+          title = (defaultText = "universal patron"),
+          permissions  = [false,false,false,true,true],
+          verbPhrase = (defaultText = "can browse all materials"),
+          description = (defaultText = "universal patrons can browse all materials."),
+        ),
+		(
+          title = (defaultText = "digital patron"),
+          permissions  = [false,false,false,true,false],
+          verbPhrase = (defaultText = "can browse digital materials"),
+          description = (defaultText = "digital patrons can browse digital materials."),
         ),
         (
-          title = (defaultText = "guest"),
-          permissions  = [false,false,false],
-          verbPhrase = (defaultText = "can see limited information"),
-          description = (defaultText = "guests have very limited view-only access."),
+          title = (defaultText = "physical patron"),
+          permissions  = [false,false,false,false,true],
+          verbPhrase = (defaultText = "can browse physical materials"),
+          description = (defaultText = "physical patrons can browse physical materials."),
         ),
       ],
     ),
