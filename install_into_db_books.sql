@@ -54,6 +54,9 @@ CREATE TABLE IF NOT EXISTS `l_locations` (
   UNIQUE KEY `code` (`code`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Locations of library materials';
 
+INSERT IGNORE INTO `l_locations` (`id`, `code`, `descr`) VALUES
+(1, 'libry', 'Library');
+
 CREATE TABLE IF NOT EXISTS `l_periodicals` (
   `issn` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -102,6 +105,9 @@ CREATE TABLE IF NOT EXISTS `l_typecodes` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `code` (`code`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Types of library materials';
+
+INSERT IGNORE INTO `l_typecodes` (`id`, `code`, `descr`, `default_location`, `access_level`) VALUES
+(1, '', 'Books', 'libry', 1);
 
 INSERT IGNORE INTO g_classes (`code`,`desc`) VALUES('L','eLibrary Access');
 INSERT IGNORE INTO g_modules (`name`,`prefix`,`folder`,`ord`,`active`) VALUES('Library','l','library',5,1);

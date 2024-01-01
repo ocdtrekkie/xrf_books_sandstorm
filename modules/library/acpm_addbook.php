@@ -16,12 +16,12 @@ if ($do == "add")
 	$isbn10 = mysqli_real_escape_string($xrf_db, $_POST['isbn10']);
 	$isbn13 = mysqli_real_escape_string($xrf_db, $_POST['isbn13']);
 	$issn = mysqli_real_escape_string($xrf_db, $_POST['issn']);
-	$lccn = mysqli_real_escape_string($xrf_db, $_POST['lccn']);
-	$lccat = mysqli_real_escape_string($xrf_db, $_POST['lccat']);
+	$lccn = mysqli_real_escape_string($xrf_db, $_POST['lccn'] ?? '');
+	$lccat = mysqli_real_escape_string($xrf_db, $_POST['lccat'] ?? '');
 	$tags = mysqli_real_escape_string($xrf_db, $_POST['tags']);
 	$series = mysqli_real_escape_string($xrf_db, $_POST['series']);
 	$serial = mysqli_real_escape_string($xrf_db, $_POST['serial']);
-	$steam_id = mysqli_real_escape_string($xrf_db, $_POST['steam_id']);
+	$steam_id = mysqli_real_escape_string($xrf_db, $_POST['steam_id'] ?? '');
 	
 	$locationquery = "SELECT default_location FROM l_typecodes WHERE code = '$typecode'";
 	$locationresult = mysqli_query($xrf_db, $locationquery);
