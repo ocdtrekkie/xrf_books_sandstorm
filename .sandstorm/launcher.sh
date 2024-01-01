@@ -19,6 +19,10 @@ mkdir -p /var/lib/php/sessions
 mkdir -p /var/log
 mkdir -p /var/log/mysql
 mkdir -p /var/log/nginx
+# Create folders we use for XRF books
+mkdir -p /var/covers
+rm -rf /var/uploads
+mkdir -p /var/uploads
 # Wipe /var/run, since pidfiles and socket files from previous launches should go away
 # TODO someday: I'd prefer a tmpfs for these.
 rm -rf /var/run
@@ -41,7 +45,7 @@ HOME=/etc/mysql /usr/sbin/mysqld --initialize
 
 # Spawn mysqld, php
 HOME=/etc/mysql /usr/sbin/mysqld --skip-grant-tables &
-/usr/sbin/php-fpm8.2 --nodaemonize --fpm-config /etc/php/8.2/fpm/php-fpm.conf &
+/usr/sbin/php-fpm8.2 --nodaemonize --fpm-config /etc/php/8.2/fpm/php-fpm.conf -c /opt/app/php.ini &
 # Wait until mysql and php have bound their sockets, indicating readiness
 wait_for mysql /var/run/mysqld/mysqld.sock
 

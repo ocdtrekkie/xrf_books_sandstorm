@@ -150,7 +150,7 @@ echo "</font></p>";
 echo "</td><td width=\"305\" align=\"center\">";
 
 $filename = "covers/$barcode.png"; 
-if (file_exists($filename)) { 
+if (file_exists("/var/$filename")) { 
 echo "<img src=\"$filename\" border=1>"; 
 }
 

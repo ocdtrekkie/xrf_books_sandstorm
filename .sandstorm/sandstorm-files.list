@@ -120,6 +120,7 @@ opt/app/modules/library/acpm_uploadcovers.php
 opt/app/modules/library/controlpanel.php
 opt/app/modules/library/functions_lib.php
 opt/app/modules/library/include_lconfig.php
+opt/app/php.ini
 opt/app/reading_list.php
 opt/app/search.php
 opt/app/search_results.php
@@ -132,6 +133,7 @@ opt/app/styles/xrflight/images/banner.png
 opt/app/styles/xrflight/images/earth.jpg
 opt/app/styles/xrflight/images/footer.png
 opt/app/styles/xrflight/style.css
+opt/app/viewrecord.php
 opt/app/xrfinfo.php
 proc/cpuinfo
 sandstorm-http-bridge
