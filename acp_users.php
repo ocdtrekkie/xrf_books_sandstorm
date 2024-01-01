@@ -24,8 +24,9 @@ $id=xrf_mysql_result($result,$qq,"id");
 $sandstormuserid=xrf_mysql_result($result,$qq,"sandstormuserid");
 $username=xrf_mysql_result($result,$qq,"username");
 $ulevel=xrf_mysql_result($result,$qq,"ulevel");
+$uclass=xrf_mysql_result($result,$qq,"uclass");
 
-echo "<tr><td width=200>$username ($id)</td><td width=400>$sandstormuserid</td><td width=100>$ulevel</td></tr>";
+echo "<tr><td width=200>$username ($id)</td><td width=400>$sandstormuserid</td><td width=100>$ulevel</td><td width=100>$uclass</td></tr>";
 $qq++;
 }
 
