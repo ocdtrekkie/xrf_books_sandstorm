@@ -115,6 +115,7 @@ opt/app/modules/library/acpm_addbook.php
 opt/app/modules/library/acpm_checkin.php
 opt/app/modules/library/acpm_checkout.php
 opt/app/modules/library/acpm_config.php
+opt/app/modules/library/acpm_editbook.php
 opt/app/modules/library/acpm_uploadcovers.js.php
 opt/app/modules/library/acpm_uploadcovers.php
 opt/app/modules/library/controlpanel.php
