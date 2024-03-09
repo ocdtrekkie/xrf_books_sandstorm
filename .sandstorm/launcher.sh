@@ -39,9 +39,11 @@ for f in $log_files; do
     fi
 done
 
-# Ensure mysql tables created
-# HOME=/etc/mysql /usr/bin/mysql_install_db
-HOME=/etc/mysql /usr/sbin/mysqld --initialize
+if [ ! -e /var/.db-initialized ]; then
+    # Ensure mysql tables created
+    HOME=/etc/mysql /usr/sbin/mysqld --initialize
+    touch /var/.db-initialized
+fi
 
 # Spawn mysqld, php
 HOME=/etc/mysql /usr/sbin/mysqld --skip-grant-tables &
