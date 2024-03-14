@@ -129,7 +129,7 @@ $sort1 = "lccat, title ASC";
 if ($sort == "recent")
 $sort1 = "barcode DESC";
 
-if ($limit != "") { $limit1 = " LIMIT $limit"; }
+if ($limit != 0) { $limit1 = " LIMIT $limit"; } else { $limit1 = ""; }
 
 $query = "SELECT * FROM l_books$default$cond1$cond2$cond3$cond4$cond5$cond6$cond7 ORDER BY $sort1$limit1";
 $result = mysqli_query($xrf_db, $query);
