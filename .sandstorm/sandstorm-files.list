@@ -93,6 +93,7 @@ opt/app/acp_module_panel.php
 opt/app/acp_service_db.php
 opt/app/acp_users.php
 opt/app/acp_view_log.php
+opt/app/add_to_reading_list.php
 opt/app/authors.php
 opt/app/includes/footer.php
 opt/app/includes/functions_auth.php
@@ -125,6 +126,7 @@ opt/app/php.ini
 opt/app/reading_list.php
 opt/app/search.php
 opt/app/search_results.php
+opt/app/serials.php
 opt/app/styles/print/style.css
 opt/app/styles/xrfdark/images/banner.png
 opt/app/styles/xrfdark/images/earth.jpg

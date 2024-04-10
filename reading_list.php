@@ -36,7 +36,7 @@ if ($xrf_myulevel > 1) {
 			if ($qr == 0 || $qr % 4 == 0) { echo "<tr>"; }
 			echo "<td height=\"250\" width=\"250\" align=\"center\"><a href=\"viewrecord.php?barcode=$barcode\">";
 			$filename = "covers/$barcode.png"; 
-			if (file_exists($filename)) { 
+			if (file_exists("/var/$filename")) { 
 			echo "<img src=\"$filename\" style=\"height:250px;max-width:250px;\" alt=\"$title$typecode\" title=\"$title$typecode\" border=1>"; 
 			} else echo "<div class=\"bookcover\"><p>$title$typecode</p><p>$aname</p></div>";
 			echo "</a><br><font size=\"2\">Added: $date<br><a href=\"remove_from_reading_list.php?passid=$bookid\">[Remove from Reading List]</a></font></td>";
