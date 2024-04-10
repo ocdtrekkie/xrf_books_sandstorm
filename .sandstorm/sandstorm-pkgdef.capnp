@@ -21,7 +21,7 @@ const pkgdef :Spk.PackageDefinition = (
 
     appVersion = 0,  # Increment this for every release.
 
-    appMarketingVersion = (defaultText = "0.0.0"),
+    appMarketingVersion = (defaultText = "0.0.1"),
     # Human-readable representation of appVersion. Should match the way you
     # identify versions of your app in documentation and marketing.
 
@@ -54,10 +54,7 @@ const pkgdef :Spk.PackageDefinition = (
 
       license = (openSource = mit),
 
-      categories = [],
-      # A list of categories/genres to which this app belongs, sorted with best fit first.
-      # See the list of categories at
-      # https://docs.sandstorm.io/en/latest/developing/publishing-apps/#categories
+      categories = [media],
 
       author = (
         # Fields relating to the author of this app.
@@ -77,12 +74,6 @@ const pkgdef :Spk.PackageDefinition = (
         #
         # Further details including how to set up GPG and how to use keybase.io can be found
         # at https://docs.sandstorm.io/en/latest/developing/publishing-apps/#verify-your-identity
-
-        upstreamAuthor = "Example App Team",
-        # Name of the original primary author of this app, if it is different from the person who
-        # produced the Sandstorm package. Setting this implies that the author connected to the PGP
-        # signature only "packaged" the app for Sandstorm, rather than developing the app.
-        # Remove this line if you consider yourself as the author of the app.
       ),
 
       #pgpKeyring = embed "path/to/pgp-keyring",
@@ -95,15 +86,9 @@ const pkgdef :Spk.PackageDefinition = (
       #
       # Where `<key-id>` is a PGP key ID or email address associated with the key.
 
-      #description = (defaultText = embed "path/to/description.md"),
-      # The app's description in Github-flavored Markdown format, to be displayed e.g.
-      # in an app store. Note that the Markdown is not permitted to contain HTML nor image tags (but
-      # you can include a list of screenshots separately).
+      description = (defaultText = embed "../README.md"),
 
-      shortDescription = (defaultText = "one-to-three words"),
-      # A very short (one-to-three words) description of what the app does. For example,
-      # "Document editor", or "Notetaking", or "Email client". This will be displayed under the app
-      # title in the grid view in the app market.
+      shortDescription = (defaultText = "Library catalog"),
 
       screenshots = [
         # Screenshots to use for marketing purposes.  Examples below.
@@ -113,10 +98,7 @@ const pkgdef :Spk.PackageDefinition = (
         #(width = 746, height = 795, jpeg = embed "path/to/screenshot-1.jpeg"),
         #(width = 640, height = 480, png = embed "path/to/screenshot-2.png"),
       ],
-      #changeLog = (defaultText = embed "path/to/sandstorm-specific/changelog.md"),
-      # Documents the history of changes in Github-flavored markdown format (with the same restrictions
-      # as govern `description`). We recommend formatting this with an H1 heading for each version
-      # followed by a bullet list of changes.
+      changeLog = (defaultText = embed "../CHANGELOG.md"),
     ),
   ),
 
