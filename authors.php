@@ -3,7 +3,7 @@ require_once("includes/global.php");
 require_once("includes/include_lconfig.php");
 require_once("includes/functions_lib.php");
 
-$letter = substr($_GET['letter'],0,1);
+$letter = substr($_GET['letter'] ?? '',0,1);
 $xrf_page_subtitle = "Authors beginning with " . $letter;
 
 require_once("includes/header.php");

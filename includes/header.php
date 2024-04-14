@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: text/html; charset=iso-8859-15');
+header('Content-Type: text/html; charset=utf-8');
 if ($xrf_mystylepref == "") {$xrf_style = $xrf_style_default;}
 else {$xrf_style = $xrf_mystylepref;}
 if (isset($xrf_page_subtitle)) { $xrf_title_nugget = " - "; } else { $xrf_page_subtitle = ""; $xrf_title_nugget = ""; }

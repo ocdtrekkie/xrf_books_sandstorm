@@ -6,7 +6,7 @@ $do = $_GET['do'] ?? '';
 $passid = mysqli_real_escape_string($xrf_db, $_GET['passid']);
 if ($do == "edit")
 {
-	$title = mysqli_real_escape_string($xrf_db, $_POST['title']);
+	$title = $_POST['title'];
 	$author_id = mysqli_real_escape_string($xrf_db, $_POST['author_id']);
 	$author_name = mysqli_real_escape_string($xrf_db, $_POST['author_name']);
 	$author_years = mysqli_real_escape_string($xrf_db, $_POST['author_years']);
