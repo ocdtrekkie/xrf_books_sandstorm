@@ -8,7 +8,8 @@ echo "<html><head><title>$xrf_site_name Library$xrf_title_nugget$xrf_page_subtit
 <link rel=\"stylesheet\" type=\"text/css\" href=\"styles/print/style.css\" media=\"print\" />
 </head><body>";
 
-echo "<div class=\"header\" align=\"center\">
+echo "<script>window.parent.postMessage({'setPath': location.pathname + location.search}, '*');</script>
+<div class=\"header\" align=\"center\">
 <table width=\"100%\"><tr><td>
 <p align=\"left\">
 <font size=\"6\" color=\"white\">$xrf_site_name</font><br>
