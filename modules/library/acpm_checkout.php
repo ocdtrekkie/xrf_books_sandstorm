@@ -18,7 +18,7 @@ if ($do == "check")
 	$result=mysqli_query($xrf_db, $query);
 	@$oldstatus=xrf_mysql_result($result,0,"status");
 	if ($oldstatus == "chked")
-		mysqli_query($xrf_db, "UPDATE l_circ SET returned = NOW() WHERE bookid = '$bookid'") or die(mysqli_error($xrf_db));
+		mysqli_query($xrf_db, "UPDATE l_circ SET returned = NOW() WHERE bookid = '$bookid' AND returned = '0'") or die(mysqli_error($xrf_db));
 	else
 		mysqli_query($xrf_db, "UPDATE l_books SET status = 'chked' WHERE barcode = '$bookid'") or die(mysqli_error($xrf_db)); 
 
