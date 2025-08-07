@@ -53,15 +53,12 @@ if ($do == "add")
 	mysqli_stmt_execute($addbook) or die(mysqli_error($xrf_db));
 	$book_id = mysqli_insert_id($xrf_db);
 	$barcode = $book_id + $xrfl_library_barcode;
-	echo "Book added with barcode <b>" . $barcode . "</b>.";
+	echo "Media added with barcode <b>" . $barcode . "</b>.";
 	
 	if ($issn != "" && $series != "" && xrfl_getperiodical($xrf_db, $issn) == "") {
-		if ($typecode == "EPER") {
 		$addseries = mysqli_prepare($xrf_db, "INSERT INTO l_periodicals (issn, title, lccn, lccat) VALUES(?,?,?,?)") or die(mysqli_error($xrf_db));
-		mysqli_stmt_bind_param($addseries,"ssss", $issn, $series, $lccn, $lccat); }
-		else {
-		$addseries = mysqli_prepare($xrf_db, "INSERT INTO l_periodicals (issn, title) VALUES(?,?)") or die(mysqli_error($xrf_db));
-		mysqli_stmt_bind_param($addseries,"ss", $issn, $series); }
+		if ($typecode == "EPER") { mysqli_stmt_bind_param($addseries,"ssss", $issn, $series, $lccn, $lccat); }
+		else { mysqli_stmt_bind_param($addseries,"ssss", $issn, $series, "", ""); }
 		mysqli_stmt_execute($addseries) or die(mysqli_error($xrf_db));
 		echo "<br>ISSN added to database.";
 	}

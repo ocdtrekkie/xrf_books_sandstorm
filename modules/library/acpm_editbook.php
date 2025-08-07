@@ -56,12 +56,9 @@ if ($do == "edit")
 	echo "Media with barcode <b>" . $barcode . "</b> edited.";
 	
 	if ($issn != "" && $series != "" && xrfl_getperiodical($xrf_db, $issn) == "") {
-		if ($typecode == "EPER") {
 		$addseries = mysqli_prepare($xrf_db, "INSERT INTO l_periodicals (issn, title, lccn, lccat) VALUES(?,?,?,?)") or die(mysqli_error($xrf_db));
-		mysqli_stmt_bind_param($addseries,"ssss", $issn, $series, $lccn, $lccat); }
-		else {
-		$addseries = mysqli_prepare($xrf_db, "INSERT INTO l_periodicals (issn, title) VALUES(?,?)") or die(mysqli_error($xrf_db));
-		mysqli_stmt_bind_param($addseries,"ss", $issn, $series); }
+		if ($typecode == "EPER") { mysqli_stmt_bind_param($addseries,"ssss", $issn, $series, $lccn, $lccat); }
+		else { mysqli_stmt_bind_param($addseries,"ssss", $issn, $series, "", ""); }
 		mysqli_stmt_execute($addseries) or die(mysqli_error($xrf_db));
 		echo "<br>ISSN added to database.";
 	}
