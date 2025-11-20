@@ -1,3 +1,5 @@
 
 *.spk
 
+# Copied during build
+includes/powerbox-http-proxy.js

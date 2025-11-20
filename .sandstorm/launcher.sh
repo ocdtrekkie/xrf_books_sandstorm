@@ -57,6 +57,17 @@ if [ ! -e /var/.db-created ]; then
     touch /var/.db-created
 fi
 
+# Start our powerbox proxy server, and wait for it to write the cert:
+export DB_TYPE=mysql
+export DB_URI="root@unix(/var/run/mysqld/mysqld.sock)/app"
+export CA_CERT_PATH=/var/ca-spoof-cert.pem
+rm -f $CA_CERT_PATH
+/opt/powerbox-http-proxy/powerbox-http-proxy &
+wait_for "root cert" "$CA_CERT_PATH"
+
+export http_proxy=http://127.0.0.1:$POWERBOX_PROXY_PORT
+export https_proxy=http://127.0.0.1:$POWERBOX_PROXY_PORT
+
 wait_for php-fpm8.2 /var/run/php/php8.2-fpm.sock
 
 # Start nginx.

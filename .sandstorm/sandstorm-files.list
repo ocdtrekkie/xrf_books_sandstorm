@@ -79,6 +79,8 @@ etc/php/8.2/mods-available/xmlreader.ini
 etc/php/8.2/mods-available/xmlwriter.ini
 etc/php/8.2/mods-available/xsl.ini
 etc/services
+etc/ssl/certs
+etc/ssl/certs/ca-certificates.crt
 etc/ssl/openssl.cnf
 lib
 lib64
@@ -107,6 +109,8 @@ opt/app/includes/global.php
 opt/app/includes/global_req_login.php
 opt/app/includes/header.php
 opt/app/includes/include_lconfig.php
+opt/app/includes/include_proxycontext.php
+opt/app/includes/powerbox-http-proxy.js
 opt/app/includes/variables.php
 opt/app/index.php
 opt/app/install_into_db.sql
@@ -138,6 +142,7 @@ opt/app/styles/xrflight/images/footer.png
 opt/app/styles/xrflight/style.css
 opt/app/viewrecord.php
 opt/app/xrfinfo.php
+opt/powerbox-http-proxy/powerbox-http-proxy
 proc/cpuinfo
 sandstorm-http-bridge
 sandstorm-http-bridge-config
@@ -155,7 +160,7 @@ usr/bin/touch
 usr/lib/locale/C.utf8/LC_CTYPE
 usr/lib/mysql/plugin/authentication_oci_client.so
 usr/lib/mysql/plugin/component_reference_cache.so
-usr/lib/mysql/private/libprotobuf-lite.so.3.19.4
+usr/lib/mysql/private/libprotobuf-lite.so.24.4.0
 usr/lib/php/20220829/calendar.so
 usr/lib/php/20220829/ctype.so
 usr/lib/php/20220829/curl.so
@@ -185,6 +190,8 @@ usr/lib/php/20220829/xml.so
 usr/lib/php/20220829/xmlreader.so
 usr/lib/php/20220829/xmlwriter.so
 usr/lib/php/20220829/xsl.so
+usr/lib/ssl/cert.pem
+usr/lib/ssl/certs
 usr/lib/ssl/openssl.cnf
 usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache
 usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
@@ -350,6 +357,7 @@ usr/share/zoneinfo/Arctic/Longyearbyen
 usr/share/zoneinfo/Asia
 usr/share/zoneinfo/Asia/Ashkhabad
 usr/share/zoneinfo/Asia/Calcutta
+usr/share/zoneinfo/Asia/Choibalsan
 usr/share/zoneinfo/Asia/Chongqing
 usr/share/zoneinfo/Asia/Chungking
 usr/share/zoneinfo/Asia/Dacca

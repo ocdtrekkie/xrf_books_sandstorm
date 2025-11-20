@@ -8,8 +8,7 @@ set -euo pipefail
 export DEBIAN_FRONTEND=noninteractive
 
 echo -e "deb http://repo.mysql.com/apt/debian/ bookworm mysql-8.0\ndeb-src http://repo.mysql.com/apt/debian/ bookworm mysql-8.0" > /etc/apt/sources.list.d/mysql.list
-wget -O /tmp/RPM-GPG-KEY-mysql https://repo.mysql.com/RPM-GPG-KEY-mysql-2023
-apt-key add /tmp/RPM-GPG-KEY-mysql
+apt-key adv --keyserver hkps://keyserver.ubuntu.com --recv-keys B7B3B788A8D3785C
 
 apt-get update
 apt-get install -y nginx php-fpm php-mysql php-cli php-curl git php-dev mysql-server
@@ -56,3 +55,23 @@ tmpdir = /var/tmp
 # Set the main data file to grow by 1MB at a time, rather than 8MB at a time.
 innodb_autoextend_increment = 1
 EOF
+
+# The version of golang in the debian repositories tends to be incredibly
+# out of date; let's get ourselves a newer version from upstream:
+if [ -e /opt/app/.sandstorm/go-version ]; then
+    # Get the same version we've used before
+    curl -L "https://go.dev/dl/$(cat '/opt/app/.sandstorm/go-version').linux-amd64.tar.gz" -o go.tar.gz
+else
+    # Get the newest version for a new project
+    curl -L "https://go.dev/dl/$(curl 'https://go.dev/VERSION?m=text' | head -n 1).linux-amd64.tar.gz" -o go.tar.gz
+fi
+tar -C /usr/local -xzf go.tar.gz
+rm go.tar.gz
+echo 'export PATH=/usr/local/go/bin:$PATH' > /etc/profile.d/go.sh
+
+# Get the same version next time
+/usr/local/go/bin/go version | cut -d ' ' -f 3 > /opt/app/.sandstorm/go-version
+
+cd /opt && git clone https://github.com/sandstorm-org/powerbox-http-proxy
+cd /opt/powerbox-http-proxy && /usr/local/go/bin/go build
+cp /opt/powerbox-http-proxy/powerbox-http-proxy.js /opt/app/includes/powerbox-http-proxy.js
