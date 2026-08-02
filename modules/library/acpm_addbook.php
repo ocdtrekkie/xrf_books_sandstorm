@@ -106,7 +106,7 @@ else
 		$sourcetags = xrf_mysql_result($sourcedataresult,0,"tags");
 	} elseif ($copyfrom != "" && $xrfl_locgov_enable == 1) {
 		// import from library of congress
-		$marcxml = simplexml_load_file(file_get_contents("https://lccn.loc.gov/$copyfrom/marcxml",false,$xrf_proxycontext));
+		$marcxml = simplexml_load_string(file_get_contents("https://lccn.loc.gov/$copyfrom/marcxml",false,$xrf_proxycontext));
 		foreach($marcxml as $datafield) {
 			if ($datafield['tag'] == "245") {
 				// title

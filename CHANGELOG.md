@@ -1,3 +1,8 @@
+# 0.0.5
+
+- Restore LCCN import functionality.
+- Paginate system log.
+
 # 0.0.4
 
 - Fixed error when adding a serial entry.
