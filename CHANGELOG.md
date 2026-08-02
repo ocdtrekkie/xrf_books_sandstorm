@@ -1,3 +1,8 @@
+# 0.0.6
+
+- Fix issue with some type categories in advanced search.
+- Fix missing remove from reading list function.
+
 # 0.0.5
 
 - Restore LCCN import functionality.

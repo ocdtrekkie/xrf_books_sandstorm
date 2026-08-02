@@ -23,7 +23,7 @@ while ($typ < $typesnum) {
 	$typcode = xrf_mysql_result($typesresult,$typ,"code");
 	$typdescr = xrf_mysql_result($typesresult,$typ,"descr");
 	$typaccess = xrf_mysql_result($typesresult,$typ,"access_level");
-	if (($typaccess == "L" && xrf_has_uclass($xrf_myuclass,"L")) || (is_numeric($typaccess) && $typaccess <= $xrf_myulevel)) {
+	if (($typaccess == "L" && xrf_has_uclass($xrf_myuclass,"L")) || ($typaccess == "P" && xrf_has_uclass($xrf_myuclass,"P")) || ($typaccess == "R" && xrf_has_uclass($xrf_myuclass,"R")) || (is_numeric($typaccess) && $typaccess <= $xrf_myulevel)) {
 		if ($typcode == "") { $typcode = "0"; }
 		echo "<option value=\"$typcode\">$typdescr</option>";
 	}
