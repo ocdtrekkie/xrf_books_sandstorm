@@ -128,6 +128,7 @@ opt/app/modules/library/functions_lib.php
 opt/app/modules/library/include_lconfig.php
 opt/app/php.ini
 opt/app/reading_list.php
+opt/app/remove_from_reading_list.php
 opt/app/search.php
 opt/app/search_results.php
 opt/app/serials.php
