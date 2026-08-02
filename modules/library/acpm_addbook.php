@@ -105,6 +105,11 @@ else
 		$sourcelccat = xrf_mysql_result($sourcedataresult,0,"lccat");
 		$sourcetags = xrf_mysql_result($sourcedataresult,0,"tags");
 	} elseif ($copyfrom != "" && $xrfl_locgov_enable == 1) {
+		echo "<script src=\"includes\powerbox-http-proxy.js\"></script>";
+		$sourcetitle = ""; $sourceauthorid = ""; $sourceauthorname = ""; $sourceauthormainname = ""; $sourceauthormorename = ""; $sourceauthoryears = "";
+		$sourcetypecode = ""; $sourcedewey = ""; $sourceformat = ""; $sourceyear = "";
+		$sourceisbn10 = ""; $sourceisbn13 = ""; $sourceissn = ""; $sourcelccn = ""; $sourcelccat = ""; $sourcetags = "";
+		$lccat2 = ""; $locsubtitle = "";
 		// import from library of congress
 		$marcxml = simplexml_load_string(file_get_contents("https://lccn.loc.gov/$copyfrom/marcxml",false,$xrf_proxycontext));
 		foreach($marcxml as $datafield) {

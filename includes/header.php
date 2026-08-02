@@ -4,7 +4,6 @@ if ($xrf_mystylepref == "") {$xrf_style = $xrf_style_default;}
 else {$xrf_style = $xrf_mystylepref;}
 if (isset($xrf_page_subtitle)) { $xrf_title_nugget = " - "; } else { $xrf_page_subtitle = ""; $xrf_title_nugget = ""; }
 echo "<html><head><title>$xrf_site_name Library$xrf_title_nugget$xrf_page_subtitle</title>
-<script src=\"includes\powerbox-http-proxy.js\"></script>
 <link rel=\"stylesheet\" type=\"text/css\" href=\"styles/$xrf_style/style.css\" />
 <link rel=\"stylesheet\" type=\"text/css\" href=\"styles/print/style.css\" media=\"print\" />
 </head><body>";
