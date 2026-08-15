@@ -106,7 +106,7 @@ else
 		$sourcetags = xrf_mysql_result($sourcedataresult,0,"tags");
 	} elseif ($copyfrom != "" && $xrfl_locgov_enable == 1) {
 		echo "<script src=\"includes\powerbox-http-proxy.js\"></script>";
-		$sourcetitle = ""; $sourceauthorid = ""; $sourceauthorname = ""; $sourceauthormainname = ""; $sourceauthormorename = ""; $sourceauthoryears = "";
+		$sourcetitle = ""; $sourceauthorid = ""; $sourceauthorname = ""; $sourceauthormorename = ""; $sourceauthoryears = "";
 		$sourcetypecode = ""; $sourcedewey = ""; $sourceformat = ""; $sourceyear = "";
 		$sourceisbn10 = ""; $sourceisbn13 = ""; $sourceissn = ""; $sourcelccn = ""; $sourcelccat = ""; $sourcetags = "";
 		$lccat2 = ""; $locsubtitle = "";
@@ -127,12 +127,14 @@ else
 				// primary author
 				foreach($datafield->subfield as $subfield) {
 					if ($subfield['code'] == "a")
-					{ $sourceauthormainname = $subfield; }
+					{ $sourceauthorname = $subfield; }
 					if ($subfield['code'] == "q")
 					{ $sourceauthormorename = $subfield; }
 					if ($subfield['code'] == "d")
 					{ $sourceauthoryears = $subfield; }
-					$sourceauthorname = $sourceauthormainname . " " . $sourceauthormorename;
+					if ($sourceauthormorename != "")
+					{ $sourceauthorname = $sourceauthorname . " " . $sourceauthormorename; }
+					$sourceauthorname = rtrim($sourceauthorname, ',');
 				}
 			}
 			if ($datafield['tag'] == "260" || $datafield['tag'] == "264") {
@@ -157,6 +159,7 @@ else
 					if ($subfield['code'] == "b")
 					{ $lccat2 = $subfield; }
 					$sourcelccat = $lccat1 . " " . $lccat2;
+					if (str_starts_with($sourcelccat, "CPB Box")) { $sourcelccat = ""; }
 				}
 			}
 			if ($datafield['tag'] == "082") {
@@ -170,7 +173,7 @@ else
 				if (substr($datafield->subfield[0],0,3) == "978" && $sourceisbn13 == "")
 				{$sourceisbn13 = $datafield->subfield[0];}
 				elseif (substr($datafield->subfield[0],0,3) != "978" && $sourceisbn10 == "")
-				{$sourceisbn10 = $datafield->subfield[0];}
+				{$sourceisbn10 = $datafield->subfield[0]; $sourceisbn10 = rtrim($sourceisbn10, " :");}
 			}
 		}
 		if ($sourcedewey != "" && $sourceauthorname != "") {
