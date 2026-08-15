@@ -1,3 +1,8 @@
+# 0.0.7
+
+- Added management panels for locations, status, and types.
+- Improved cleanup of LCCN import data.
+
 # 0.0.6
 
 - Fix issue with some type categories in advanced search.
