@@ -97,6 +97,7 @@ opt/app/acp_users.php
 opt/app/acp_view_log.php
 opt/app/add_to_reading_list.php
 opt/app/authors.php
+opt/app/favicon.ico
 opt/app/includes/footer.php
 opt/app/includes/functions_auth.php
 opt/app/includes/functions_class.php

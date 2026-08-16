@@ -138,9 +138,12 @@ $num=mysqli_num_rows($result);
 if ($xrf_page_subtitle == "") { $xrf_page_subtitle = "Search Results"; }
 require_once("includes/header.php");
 
-echo "$xrf_page_subtitle<br>Results Found: $num<br>&nbsp;<br><table width=\"100%\">";
+echo "<div style=\"display:flex; justify-content:space-between; align-items:center;\"><div style=\"text-align:left;\">$xrf_page_subtitle<br>Results Found: $num</div>";
 
-if ($num <= 24 && $view != "list") { $view = "shelf"; }
+if ($num <= 24 && $view != "list") { $view = "shelf"; $view_next = "list"; $view_next_label = "[List View]"; } else { $view_next = "shelf"; $view_next_label = "[Shelf View]"; }
+
+echo "<div style=\"text-align:right;\"><form method=\"post\" action=\"search_results.php?filter=$filter&group=$group&author=$author&sort=$sort&limit=$limit&issn=$issn&location=$location&type=$type&view=$view_next\"><input type=\"hidden\" name=\"searchterm\" value=\"$searchterm\"><input type=\"hidden\" name=\"searchwhat\" value=\"$searchwhat\">
+<input type=\"submit\" value=\"$view_next_label\" style=\"background:none;border:none;padding:0;margin:0;color:inherit;cursor:pointer;font:inherit;font-size:small;\" onmouseover=\"this.style.textDecoration='underline';\" onmouseout=\"this.style.textDecoration='none';\"></form></div></div><br>&nbsp;<br><table width=\"100%\">";
 
 $qq=0;
 while ($qq < $num) {
