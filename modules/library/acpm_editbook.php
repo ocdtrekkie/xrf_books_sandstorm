@@ -21,17 +21,12 @@ if ($do == "edit")
 	$lccat = mysqli_real_escape_string($xrf_db, $_POST['lccat']);
 	$tags = mysqli_real_escape_string($xrf_db, $_POST['tags']);
 	$series = mysqli_real_escape_string($xrf_db, $_POST['series']);
+	$status = mysqli_real_escape_string($xrf_db, $_POST['status']);
+	$location = mysqli_real_escape_string($xrf_db, $_POST['location']);
+	
+	// TODO: Implement these
 	// $serial = mysqli_real_escape_string($xrf_db, $_POST['serial']);
 	// $steam_id = mysqli_real_escape_string($xrf_db, $_POST['steam_id']);
-	
-	$locationquery = "SELECT default_location FROM l_typecodes WHERE code = '$typecode'";
-	$locationresult = mysqli_query($xrf_db, $locationquery);
-	$locationnum=mysqli_num_rows($locationresult);
-	if ($locationnum > 0 ) { $location = xrf_mysql_result($locationresult,0,"default_location"); }
-	else { $location = ""; }
-	
-	if ($dewey == "") { $status = "uncat"; }
-	else { $status = "avail"; $dewey = str_replace("/","",trim($dewey)); }
 	
 	$isbn10 = str_replace("-","",trim($isbn10));
 	$isbn13 = str_replace("-","",trim($isbn13));
@@ -96,6 +91,14 @@ else
 	$sourcelccn = xrf_mysql_result($sourcedataresult,0,"lccn");
 	$sourcelccat = xrf_mysql_result($sourcedataresult,0,"lccat");
 	$sourcetags = xrf_mysql_result($sourcedataresult,0,"tags");
+	$sourcestatus = xrf_mysql_result($sourcedataresult,0,"status");
+	$sourcelocation = xrf_mysql_result($sourcedataresult,0,"location");
+	
+	$statusquery = "SELECT code, descr FROM l_statuses ORDER BY id";
+	$statusresult = mysqli_query($xrf_db, $statusquery);
+	
+	$locationquery = "SELECT code, descr FROM l_locations ORDER BY id";
+	$locationresult = mysqli_query($xrf_db, $locationquery);
 	
 	echo "<b>Edit Library Media</b><p>";
 
@@ -110,7 +113,27 @@ else
 		echo "<tr><td><b>LCCN/Cat:</b></td><td><input type=\"text\" name=\"lccn\" size=\"14\" value=\"$sourcelccn\"> <input type=\"text\" name=\"lccat\" size=\"25\" value=\"$sourcelccat\"></td></tr>";
 	
 	echo "<tr><td><b>Tags:</b></td><td><textarea name=\"tags\" rows=\"3\" cols=\"34\">$sourcetags</textarea></tr>
-	<tr><td><b>Series:</b></td><td><input type=\"text\" name=\"series\" size=\"44\"></td></tr>";
+	<tr><td><b>Series:</b></td><td><input type=\"text\" name=\"series\" size=\"44\"></td></tr>
+	<tr><td><b>Status/Location:</b></td><td><select name=\"status\">";
+	
+	while ($row = mysqli_fetch_assoc($statusresult)) {
+		$code = mysqli_real_escape_string($xrf_db, $row['code']);
+		$descr = mysqli_real_escape_string($xrf_db, $row['descr']);
+		$selected = ($code == $sourcestatus) ? " selected=\"selected\"" : "";
+		echo "<option value=\"{$code}\"{$selected}>{$descr}</option>";
+	}
+	
+	echo "</select><select name=\"location\">";
+	
+	while ($row = mysqli_fetch_assoc($locationresult)) {
+		$code = mysqli_real_escape_string($xrf_db, $row['code']);
+		$descr = mysqli_real_escape_string($xrf_db, $row['descr']);
+		$selected = ($code == $sourcelocation) ? " selected=\"selected\"" : "";
+		echo "<option value=\"{$code}\"{$selected}>{$descr}</option>";
+	}
+	
+	echo "</select></td></tr>";
+	
 	/* echo "<tr><td><b>Serial #:</b></td><td><input type=\"text\" name=\"serial\" size=\"44\"></td></tr>"; */
 	
 	/* if ($xrfl_steam_enable == 1)
