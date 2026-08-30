@@ -82,6 +82,7 @@ if ($do == "add")
 }
 else
 {
+	if ($xrfl_locgov_enable == 1) { echo "<script src=\"includes\powerbox-http-proxy.js\"></script>"; };
 	$copyfrom = mysqli_real_escape_string($xrf_db, $_GET['copyfrom'] ?? '');
 	$postcopyfrom = mysqli_real_escape_string($xrf_db, $_POST['copyfrom'] ?? '');
 	if ($copyfrom == "" && $postcopyfrom != "") { $copyfrom = $postcopyfrom;}
@@ -105,7 +106,6 @@ else
 		$sourcelccat = xrf_mysql_result($sourcedataresult,0,"lccat");
 		$sourcetags = xrf_mysql_result($sourcedataresult,0,"tags");
 	} elseif ($copyfrom != "" && $xrfl_locgov_enable == 1) {
-		echo "<script src=\"includes\powerbox-http-proxy.js\"></script>";
 		$sourcetitle = ""; $sourceauthorid = ""; $sourceauthorname = ""; $sourceauthormorename = ""; $sourceauthoryears = "";
 		$sourcetypecode = ""; $sourcedewey = ""; $sourceformat = ""; $sourceyear = "";
 		$sourceisbn10 = ""; $sourceisbn13 = ""; $sourceissn = ""; $sourcelccn = ""; $sourcelccat = ""; $sourcetags = "";
