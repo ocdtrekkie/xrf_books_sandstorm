@@ -1,3 +1,9 @@
+# 0.0.8
+
+- Added toggle between list and shelf view in search results.
+- Added ability to update status, location, serial, and Steam ID.
+- Fixed bug getting Powerbox access on new grains.
+
 # 0.0.7
 
 - Added management panels for locations, status, and types.

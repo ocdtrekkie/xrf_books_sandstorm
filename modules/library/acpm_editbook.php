@@ -17,16 +17,14 @@ if ($do == "edit")
 	$isbn10 = mysqli_real_escape_string($xrf_db, $_POST['isbn10']);
 	$isbn13 = mysqli_real_escape_string($xrf_db, $_POST['isbn13']);
 	$issn = mysqli_real_escape_string($xrf_db, $_POST['issn']);
-	$lccn = mysqli_real_escape_string($xrf_db, $_POST['lccn']);
-	$lccat = mysqli_real_escape_string($xrf_db, $_POST['lccat']);
+	$lccn = mysqli_real_escape_string($xrf_db, $_POST['lccn'] ?? '');
+	$lccat = mysqli_real_escape_string($xrf_db, $_POST['lccat'] ?? '');
 	$tags = mysqli_real_escape_string($xrf_db, $_POST['tags']);
 	$series = mysqli_real_escape_string($xrf_db, $_POST['series']);
+	$serial = mysqli_real_escape_string($xrf_db, $_POST['serial'] ?? '');
+	$steam_id = (int)mysqli_real_escape_string($xrf_db, $_POST['steam_id'] ?? 0);
 	$status = mysqli_real_escape_string($xrf_db, $_POST['status']);
 	$location = mysqli_real_escape_string($xrf_db, $_POST['location']);
-	
-	// TODO: Implement these
-	// $serial = mysqli_real_escape_string($xrf_db, $_POST['serial']);
-	// $steam_id = mysqli_real_escape_string($xrf_db, $_POST['steam_id']);
 	
 	$isbn10 = str_replace("-","",trim($isbn10));
 	$isbn13 = str_replace("-","",trim($isbn13));
@@ -58,19 +56,63 @@ if ($do == "edit")
 		echo "<br>ISSN added to database.";
 	}
 	
-	/* if ($serial != "") {
-		$addserial = mysqli_prepare($xrf_db, "INSERT INTO l_serials (barcode, serial) VALUES(?,?)") or die(mysqli_error($xrf_db));
-		mysqli_stmt_bind_param($addserial,"is", $book_id, $serial);
-		mysqli_stmt_execute($addserial) or die(mysqli_error($xrf_db));
-		echo "<br>Serial added to database.";
-	} */
+	$serial_exists = false;
+	$old_serial = null;
+	$old_serial_stmt = mysqli_prepare($xrf_db, "SELECT serial FROM l_serials WHERE barcode = ?") or die(mysqli_error($xrf_db));
+	mysqli_stmt_bind_param($old_serial_stmt,"i",$passid);
+	mysqli_stmt_execute($old_serial_stmt) or die(mysqli_error($xrf_db));
+	mysqli_stmt_bind_result($old_serial_stmt, $old_serial);
+	if (mysqli_stmt_fetch($old_serial_stmt)) { $serial_exists = true; }
+	mysqli_stmt_close($old_serial_stmt);
 	
-	/* if ($steam_id != "" && $xrfl_steam_enable == 1) {
-		$addsteamid = mysqli_prepare($xrf_db, "INSERT INTO l_externals (barcode, steam_id) VALUES(?,?)") or die(mysqli_error($xrf_db));
-		mysqli_stmt_bind_param($addsteamid,"ii", $book_id, $steam_id);
-		mysqli_stmt_execute($addsteamid) or die(mysqli_error($xrf_db));
-		echo "<br>Steam ID added to database.";
-	} */
+	if ($serial !== "") {
+		if (!$serial_exists) {
+			$addserial = mysqli_prepare($xrf_db, "INSERT INTO l_serials (barcode, serial) VALUES(?,?)") or die(mysqli_error($xrf_db));
+			mysqli_stmt_bind_param($addserial,"is",$passid,$serial);
+			mysqli_stmt_execute($addserial) or die(mysqli_error($xrf_db));
+			echo "<br>Serial added to database.";
+		} elseif ($serial !== $old_serial) {
+			$updateserial = mysqli_prepare($xrf_db, "UPDATE l_serials SET serial = ? WHERE barcode = ? LIMIT 1") or die(mysqli_error($xrf_db));
+			mysqli_stmt_bind_param($updateserial,"si",$serial,$passid);
+			mysqli_stmt_execute($updateserial) or die(mysqli_error($xrf_db));
+			echo "<br>Serial updated in database.";
+		}
+	} elseif ($serial_exists) {
+		$deleteserial = mysqli_prepare($xrf_db, "DELETE FROM l_serials WHERE barcode = ? LIMIT 1") or die(mysqli_error($xrf_db));
+		mysqli_stmt_bind_param($deleteserial,"i",$passid);
+		mysqli_stmt_execute($deleteserial) or die(mysqli_error($xrf_db));
+		if (mysqli_stmt_affected_rows($deleteserial) == 1) { echo "<br>Serial removed from database."; }
+	}
+	
+	if ($xrfl_steam_enable == 1) {
+		$steam_exists = false;
+		$old_steam_id = null;
+		$old_steam_stmt = mysqli_prepare($xrf_db, "SELECT steam_id FROM l_externals WHERE barcode = ?") or die (mysqli_error($xrf_db));
+		mysqli_stmt_bind_param($old_steam_stmt,"i",$passid);
+		mysqli_stmt_execute($old_steam_stmt) or die(mysqli_error($xrf_db));
+		mysqli_stmt_bind_result($old_steam_stmt, $old_steam_id);
+		if (mysqli_stmt_fetch($old_steam_stmt)) { $steam_exists = true; }
+		mysqli_stmt_close($old_steam_stmt);
+		
+		if ($steam_id !== 0) {
+			if (!$steam_exists) {
+				$addsteamid = mysqli_prepare($xrf_db, "INSERT INTO l_externals (barcode, steam_id) VALUES(?,?)") or die(mysqli_error($xrf_db));
+				mysqli_stmt_bind_param($addsteamid,"ii",$passid,$steam_id);
+				mysqli_stmt_execute($addsteamid) or die(mysqli_error($xrf_db));
+				echo "<br>Steam ID added to database.";
+			} elseif ($steam_id !== $old_steam_id) {
+				$updatesteamid = mysqli_prepare($xrf_db, "UPDATE l_externals SET steam_id = ? WHERE barcode = ? LIMIT 1") or die(mysqli_error($xrf_db));
+				mysqli_stmt_bind_param($updatesteamid,"ii",$steam_id,$passid);
+				mysqli_stmt_execute($updatesteamid) or die(mysqli_error($xrf_db));
+				echo "<br>Steam ID updated in database.";
+			}
+		} elseif ($steam_exists) {
+			$deletesteamid = mysqli_prepare($xrf_db, "DELETE FROM l_externals WHERE barcode = ? LIMIT 1") or die(mysqli_error($xrf_db));
+			mysqli_stmt_bind_param($deletesteamid,"i",$passid);
+			mysqli_stmt_execute($deletesteamid) or die(mysqli_error($xrf_db));
+			if (mysqli_stmt_affected_rows($deletesteamid) == 1) { echo "<br>Steam ID removed from database."; }
+		}
+	}
 	
 	echo "<p><font size=\"2\"><a href=\"acp_module_panel.php?modfolder=$modfolder&modpanel=addbook&copyfrom=$barcode\">[Clone This Book]</a> <a href=\"acp_module_panel.php?modfolder=$modfolder&modpanel=uploadcovers\">[Upload Covers]</a></font></p>";
 }
@@ -91,6 +133,17 @@ else
 	$sourcelccn = xrf_mysql_result($sourcedataresult,0,"lccn");
 	$sourcelccat = xrf_mysql_result($sourcedataresult,0,"lccat");
 	$sourcetags = xrf_mysql_result($sourcedataresult,0,"tags");
+	
+	$sourceserial = "";
+	$serialresult = mysqli_query($xrf_db, "SELECT serial FROM l_serials WHERE barcode = $passid");
+	if (mysqli_num_rows($serialresult) > 0) { $sourceserial = xrf_mysql_result($serialresult,0,"serial"); }
+	
+	if ($xrfl_steam_enable == 1) {
+		$sourcesteamid = "";
+		$steamresult = mysqli_query($xrf_db, "SELECT steam_id FROM l_externals WHERE barcode = $passid");
+		if (mysqli_num_rows($steamresult) > 0) { $sourcesteamid = xrf_mysql_result($steamresult,0,"steam_id"); }
+	}
+	
 	$sourcestatus = xrf_mysql_result($sourcedataresult,0,"status");
 	$sourcelocation = xrf_mysql_result($sourcedataresult,0,"location");
 	
@@ -113,8 +166,14 @@ else
 		echo "<tr><td><b>LCCN/Cat:</b></td><td><input type=\"text\" name=\"lccn\" size=\"14\" value=\"$sourcelccn\"> <input type=\"text\" name=\"lccat\" size=\"25\" value=\"$sourcelccat\"></td></tr>";
 	
 	echo "<tr><td><b>Tags:</b></td><td><textarea name=\"tags\" rows=\"3\" cols=\"34\">$sourcetags</textarea></tr>
-	<tr><td><b>Series:</b></td><td><input type=\"text\" name=\"series\" size=\"44\"></td></tr>
-	<tr><td><b>Status/Location:</b></td><td><select name=\"status\">";
+	<tr><td><b>Series:</b></td><td><input type=\"text\" name=\"series\" size=\"44\"></td></tr>";
+	
+	echo "<tr><td><b>Serial #:</b></td><td><input type=\"text\" name=\"serial\" size=\"44\" value=\"$sourceserial\"></td></tr>";
+	
+	if ($xrfl_steam_enable == 1)
+		echo "<tr><td><b>Steam ID:</b></td><td><input type=\"text\" name=\"steam_id\" size=\"10\" value=\"$sourcesteamid\"></td></tr>";
+	
+	echo "<tr><td><b>Status/Location:</b></td><td><select name=\"status\">";
 	
 	while ($row = mysqli_fetch_assoc($statusresult)) {
 		$code = mysqli_real_escape_string($xrf_db, $row['code']);
@@ -133,11 +192,6 @@ else
 	}
 	
 	echo "</select></td></tr>";
-	
-	/* echo "<tr><td><b>Serial #:</b></td><td><input type=\"text\" name=\"serial\" size=\"44\"></td></tr>"; */
-	
-	/* if ($xrfl_steam_enable == 1)
-		echo "<tr><td><b>Steam ID:</b></td><td><input type=\"text\" name=\"steam_id\" size=\"10\"></td></tr>"; */
 	
 	echo "<tr><td></td><td><input type=\"submit\" value=\"Edit\"></td></tr></table></form>";
 }
